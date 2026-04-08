@@ -2,11 +2,10 @@
 update_dns_auto.py
 
 # Data & Configurations
-*.csv
+# (*.csv global ignore removed to allow optimized_cf_ips.csv)
 # Explicitly ignoring specific CSVs to be safe
 credentials.csv
 OptiDomainbot.csv
-optimized_cf_ips.csv
 
 # Python Virtual Environment
 .venv/
