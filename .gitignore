@@ -1,15 +1,6 @@
-# Backend Automation & Node Updater
-update_dns_auto.py
+# IDE Files
+.vscode/
 
-# Data & Configurations
-# (*.csv global ignore removed to allow optimized_cf_ips.csv)
-# Explicitly ignoring specific CSVs to be safe
-credentials.csv
-OptiDomainbot.csv
-
-# Python Virtual Environment
-.venv/
-__pycache__/
-
-# Environment Variables
-.env
+# OS generated files
+.DS_Store
+Thumbs.db
