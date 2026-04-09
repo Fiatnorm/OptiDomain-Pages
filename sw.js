@@ -7,7 +7,7 @@
  *  - External URLs  → Network-only  (fonts / iframes / itdog)
  */
 
-const CACHE_NAME    = 'optidomain-v31';
+const CACHE_NAME    = 'optidomain-v32-FINAL';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
