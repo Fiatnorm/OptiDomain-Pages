@@ -517,3 +517,23 @@ td.code-font { color: #3D2D1E; font-size: 0.9rem; }
         transition: none !important;
     }
 }
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+.md-footer {
+    text-align: center;
+    padding: 36px 16px 24px;
+    margin-top: 12px;
+    color: var(--md-sys-color-secondary);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+.md-footer a {
+    color: var(--clr-ct);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+.md-footer a:hover {
+    color: #F6821F;
+    text-decoration: underline;
+}
