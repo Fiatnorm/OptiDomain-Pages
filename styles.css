@@ -425,7 +425,6 @@ td.code-font { color: #3D2D1E; font-size: 0.9rem; }
     max-width: calc(100vw - 32px);
     overflow: hidden;
     text-overflow: ellipsis;
-    will-change: transform, opacity;  /* GPU pre-compositing for smooth animation */
 }
 .md-toast.show {
     transform: translateX(-50%) translateY(0) scale(1);

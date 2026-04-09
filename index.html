@@ -47,8 +47,8 @@
     <link rel="dns-prefetch" href="https://www.itdog.cn">
     <link rel="dns-prefetch" href="https://vps789.com">
 
-    <!-- Fonts: display=swap prevents FOIT -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap"
+    <!-- Fonts: display=swap prevents FOIT, updated to Inter Variable Font to significantly reduce network request sizes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:wght@400;500&display=swap"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
           rel="stylesheet">
@@ -108,7 +108,7 @@
                     id="tcpingImg"
                     src="ITDOGTcping.webp"
                     alt="ITDog TCPing nationwide connectivity test snapshot"
-                    fetchpriority="high"
+                    loading="lazy"
                     width="900"
                     height="500"
                     class="tcping-img">

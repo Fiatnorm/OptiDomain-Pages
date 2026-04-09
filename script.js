@@ -115,6 +115,10 @@ class UIController {
     }
 
     static showToast(msg) {
+        // 防抖：如果队列中已有同样的消息，或是当前正显示同样的消息，则忽略
+        if (this.#toastBusy && this.#toast.textContent === msg) return;
+        if (this.#toastQueue.includes(msg)) return;
+        
         this.#toastQueue.push(msg);
         if (!this.#toastBusy) this.#drainToastQueue();
     }
@@ -123,14 +127,22 @@ class UIController {
         if (!this.#toastQueue.length) { this.#toastBusy = false; return; }
         if (!this.#toast) return;
         this.#toastBusy = true;
+        
+        // 如果即将显示，动态赋予 will-change 来实现无感知硬件加速
+        this.#toast.style.willChange = 'transform, opacity';
+        
         const msg = this.#toastQueue.shift();
         this.#toast.textContent = msg;
         this.#toast.classList.add('show');
+        
         if (this.#toastTimer) clearTimeout(this.#toastTimer);
         this.#toastTimer = setTimeout(() => {
             this.#toast.classList.remove('show');
-            // Wait for CSS fade-out to finish, then show next
-            setTimeout(() => this.#drainToastQueue(), CONFIG.toastFadeMs);
+            setTimeout(() => {
+                // 动画播毕移除 will-change 防止显存挂载
+                this.#toast.style.willChange = 'auto';
+                this.#drainToastQueue();
+            }, CONFIG.toastFadeMs);
         }, CONFIG.toastDuration);
     }
 
@@ -383,6 +395,8 @@ class NetworkManager {
             }
             Logger.error('fetchEngineNodes failed:', err);
             UIController.showToast('无法连接到数据源，请检查网络后重试');
+            // 细化触觉反馈：网络失败发出急促的双短震预警
+            if (navigator.vibrate) navigator.vibrate([20, 50, 20]);
 
             const tbody = document.getElementById('tableBody');
             const tr = document.createElement('tr');
@@ -479,14 +493,14 @@ document.addEventListener('DOMContentLoaded', () => {
             img.hidden       = true;
             imgErrorEl.hidden = false;
             // Build placeholder with CSP-compliant event delegation (no onclick=)
-            imgErrorEl.innerHTML = [
+            imgErrorEl.insertAdjacentHTML('beforeend', [
                 '<span class="material-symbols-outlined err-icon">image_not_supported</span>',
                 '<strong>快照暂时无法加载</strong>',
                 '<span>TCPing 截图资源不可用，请检查本地文件是否存在</span>',
                 '<button class="md-btn btn-tonal" data-action="reload" style="margin-top:4px">',
                 '  <span class="material-symbols-outlined" aria-hidden="true">refresh</span>刷新页面',
                 '</button>',
-            ].join('');
+            ].join(''));
         }, { once: true });
     }
 });
