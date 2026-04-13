@@ -485,6 +485,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click',   handleAction);
     document.addEventListener('keydown', handleAction);
 
+    // ── Iframe Adaptive Scaler ──
+    const wrap = document.getElementById('monitorIframeWrap');
+    const iframe = document.getElementById('monitorIframe');
+    if (wrap && iframe) {
+        const resize = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                // If the container shrinks below 632, scale it down. Otherwise keep 1.
+                const scale = Math.min(1, entry.contentRect.width / 632);
+                iframe.style.transform = `scale(${scale})`;
+            }
+        });
+        resize.observe(wrap);
+    }
+
     // ── Image error: show friendly placeholder if TCPing snapshot fails ──
     const img        = document.getElementById('tcpingImg');
     const imgErrorEl = document.getElementById('tcpingErrorPlaceholder');
