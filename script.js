@@ -20,6 +20,8 @@ const edgeCoverageDetail = document.getElementById('edgeCoverageDetail');
 const WILDCARD_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789';
 const DEFAULT_WILDCARD_HOST = '*.cdn.fiatnorm.us.kg:443';
 const WILDCARD_VISIBLE_MS = 3200;
+const MISSING_VALUE = '—';
+const MISSING_FIELD_PATTERN = /^(?:-+|—|n\/?a|null)$/i;
 let wildcardResetTimer;
 let activeLoadController;
 
@@ -52,15 +54,44 @@ function renderLoading() {
 
 function parseData(payload) {
     const lines = payload.replace(/^\uFEFF/, '').split(/\r?\n/).map(line => line.trim()).filter(Boolean);
-    const timestamp = lines.find(line => line.startsWith('## ExecutionTime:'));
-    const rows = lines.filter(line => !line.startsWith('#')).map(line => {
-        const match = line.match(/^([^#\s]+)#\s*([A-Z]{2})\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)$/);
-        if (!match) return null;
-        const [, ipPort, country, colo, latency, loss, speed, score] = match;
-        return { ipPort, country, colo, latency, loss, speed, score };
-    }).filter(Boolean);
+    const timestamp = lines.find(line => /^#{1,2}\s*ExecutionTime\s*:/i.test(line));
+    const rows = lines.map(parseNode).filter(Boolean);
     if (!rows.length) throw new Error('No valid IP records were found.');
-    return { timestamp: timestamp?.replace('## ExecutionTime:', '').trim(), rows };
+    return { timestamp: timestamp?.replace(/^#{1,2}\s*ExecutionTime\s*:\s*/i, '').trim(), rows };
+}
+
+function parseNode(line) {
+    if (line.startsWith('#')) return null;
+    const separator = line.indexOf('#');
+    if (separator <= 0) return null;
+
+    const ipPort = line.slice(0, separator).trim();
+    const fields = line.slice(separator + 1).trim().split(/\s+/).filter(Boolean);
+    if (!ipPort || ipPort.toUpperCase() === 'IP:PORT' || fields.length < 2) return null;
+
+    const [country, colo, latency = MISSING_VALUE, loss = MISSING_VALUE, ...remaining] = fields;
+    let speed = MISSING_VALUE;
+    let score = MISSING_VALUE;
+    if (remaining.length > 1) {
+        [speed, score] = remaining;
+    } else if (remaining.length === 1) {
+        if (MISSING_FIELD_PATTERN.test(remaining[0]) || /(?:bps|b\/s|byte)/i.test(remaining[0])) speed = remaining[0];
+        else score = remaining[0];
+    }
+
+    return {
+        ipPort,
+        country: normalizeField(country),
+        colo: normalizeField(colo),
+        latency: normalizeField(latency),
+        loss: normalizeField(loss),
+        speed: normalizeField(speed),
+        score: normalizeField(score),
+    };
+}
+
+function normalizeField(value) {
+    return value && !MISSING_FIELD_PATTERN.test(value) ? value : MISSING_VALUE;
 }
 
 function renderRows(rows) {
@@ -76,19 +107,22 @@ function renderRows(rows) {
 }
 
 function metricNumber(value) {
-    return Number.parseFloat(String(value).replace(/[^\d.]/g, ''));
+    const number = Number.parseFloat(String(value).replace(/[^\d.]/g, ''));
+    return Number.isFinite(number) ? number : NaN;
 }
 
 function renderSummary(rows, timestamp) {
-    const quickest = rows.reduce((best, row) => metricNumber(row.latency) < metricNumber(best.latency) ? row : best);
-    const fastest = rows.reduce((best, row) => metricNumber(row.speed) > metricNumber(best.speed) ? row : best);
-    const countries = new Set(rows.map(row => row.country));
-    const colos = new Set(rows.map(row => row.colo));
+    const latencyRows = rows.filter(row => Number.isFinite(metricNumber(row.latency)));
+    const speedRows = rows.filter(row => Number.isFinite(metricNumber(row.speed)));
+    const quickest = latencyRows.reduce((best, row) => !best || metricNumber(row.latency) < metricNumber(best.latency) ? row : best, null);
+    const fastest = speedRows.reduce((best, row) => !best || metricNumber(row.speed) > metricNumber(best.speed) ? row : best, null);
+    const countries = new Set(rows.map(row => row.country).filter(value => value !== MISSING_VALUE));
+    const colos = new Set(rows.map(row => row.colo).filter(value => value !== MISSING_VALUE));
 
-    bestLatency.textContent = quickest.latency;
-    bestLatencyDetail.textContent = `${quickest.country} · ${quickest.colo}`;
-    peakDownload.textContent = fastest.speed;
-    peakDownloadDetail.textContent = `${fastest.country} · ${fastest.colo}`;
+    bestLatency.textContent = quickest?.latency || MISSING_VALUE;
+    bestLatencyDetail.textContent = quickest ? `${quickest.country} · ${quickest.colo}` : 'No latency data';
+    peakDownload.textContent = fastest?.speed || MISSING_VALUE;
+    peakDownloadDetail.textContent = fastest ? `${fastest.country} · ${fastest.colo}` : 'No download data';
     edgeCoverage.textContent = `${colos.size} locations`;
     edgeCoverageDetail.textContent = `${countries.size} country codes · ${rows.length} nodes`;
     sourceTimestamp.textContent = timestamp ? `Source time · ${timestamp}` : 'Live source data';
