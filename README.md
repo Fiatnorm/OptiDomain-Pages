@@ -32,11 +32,10 @@ IP:PORT#COUNTRY COLO LATENCY LOSS DOWNLOAD SCORE
 
 `DOWNLOAD` 或 `SCORE` 可以缺失；推荐以 `-` 占位，页面会保留该节点并将缺失值显示为 `—`。网络概览只使用实际存在的数值，不会将缺失字段当作零值。
 
-首行可选时间戳，兼容单个或两个 `#`，并在存在时显示：
+首行可选时间戳使用单个 `#`，并在存在时显示：
 
 ```text
 #ExecutionTime: YYYY-MM-DD HH:MM:SS
-## ExecutionTime: YYYY-MM-DD HH:MM:SS
 ```
 
 ## 验证

@@ -54,10 +54,10 @@ function renderLoading() {
 
 function parseData(payload) {
     const lines = payload.replace(/^\uFEFF/, '').split(/\r?\n/).map(line => line.trim()).filter(Boolean);
-    const timestamp = lines.find(line => /^#{1,2}\s*ExecutionTime\s*:/i.test(line));
+    const timestamp = lines.find(line => /^#\s*ExecutionTime\s*:/i.test(line));
     const rows = lines.map(parseNode).filter(Boolean);
     if (!rows.length) throw new Error('No valid IP records were found.');
-    return { timestamp: timestamp?.replace(/^#{1,2}\s*ExecutionTime\s*:\s*/i, '').trim(), rows };
+    return { timestamp: timestamp?.replace(/^#\s*ExecutionTime\s*:\s*/i, '').trim(), rows };
 }
 
 function parseNode(line) {

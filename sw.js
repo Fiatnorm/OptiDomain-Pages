@@ -1,4 +1,4 @@
-const CACHE_NAME = 'optidomain-v35-ip-data';
+const CACHE_NAME = 'optidomain-v36-ip-data';
 const STATIC_ASSETS = ['/', '/index.html', '/styles.css', '/script.js', '/manifest.json', '/Tcptest.webp'];
 const DATA_CACHE_KEY = 'optidomain-ip-data-snapshot';
 
