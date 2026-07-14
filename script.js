@@ -1,7 +1,7 @@
 'use strict';
 
 const CONFIG = Object.freeze({
-    endpoint: 'optimized_cf_ips.txt',
+    endpoint: 'https://raw.githubusercontent.com/Fiatnorm/OptiDomain-Pages/main/optimized_cf_ips.txt',
     columns: ['IP:PORT', 'COUNTRY', 'COLO', 'LATENCY', 'LOSS', 'DOWNLOAD', 'SCORE'],
 });
 
@@ -20,6 +20,7 @@ const edgeCoverageDetail = document.getElementById('edgeCoverageDetail');
 const WILDCARD_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789';
 const DEFAULT_WILDCARD_HOST = '*.cdn.fiatnorm.us.kg:443';
 const WILDCARD_VISIBLE_MS = 3200;
+const DATA_REQUEST_TIMEOUT_MS = 12000;
 const MISSING_VALUE = '—';
 const MISSING_FIELD_PATTERN = /^(?:-+|—|n\/?a|null)$/i;
 let wildcardResetTimer;
@@ -131,6 +132,11 @@ function renderSummary(rows, timestamp) {
 async function loadData() {
     activeLoadController?.abort();
     const controller = new AbortController();
+    let timedOut = false;
+    const timeoutId = setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+    }, DATA_REQUEST_TIMEOUT_MS);
     activeLoadController = controller;
     renderLoading();
     retryBlock.hidden = true;
@@ -144,12 +150,14 @@ async function loadData() {
         renderSummary(rows, timestamp);
         syncStatus.textContent = `${rows.length} active nodes`;
     } catch (error) {
-        if (error.name === 'AbortError') return;
-        tableBody.innerHTML = `<tr><td class="empty-state" colspan="7">Unable to load optimized IPs. ${escapeHtml(error.message)}</td></tr>`;
+        if (error.name === 'AbortError' && !timedOut) return;
+        const message = timedOut ? 'Request timed out' : error.message;
+        tableBody.innerHTML = `<tr><td class="empty-state" colspan="7">Unable to load optimized IPs. ${escapeHtml(message)}</td></tr>`;
         syncStatus.textContent = 'Load failed';
         sourceTimestamp.textContent = 'Source data unavailable';
         retryBlock.hidden = false;
     } finally {
+        clearTimeout(timeoutId);
         if (activeLoadController === controller) activeLoadController = undefined;
     }
 }
