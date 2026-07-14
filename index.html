@@ -1,276 +1,121 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OptiDomain - CloudFlare Edge Routing Dashboard</title>
-    <meta name="description" content="OptiDomain：CloudFlare IP 智能优选工具，三网自动路由调度，实时延迟监控。">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <!-- Domain config injected here; script.js reads this to avoid hardcoding -->
-    <meta name="routing-domain" content="djx-ybelove.pp.ua">
+    <meta name="theme-color" content="#fbf8f3">
+    <meta name="description" content="OptiDomain optimized Cloudflare IPs for cdn.fiatnorm.us.kg:443.">
+    <title>OptiDomain · Optimized IPs</title>
     <link rel="icon" type="image/webp" href="OptiDomainfavicon-32x32.webp">
-
-    <!-- Open Graph: rich preview in social apps (Telegram, Discord, WeChat) -->
-    <meta property="og:type"        content="website">
-    <meta property="og:title"       content="OptiDomain · CloudFlare Edge Routing Dashboard">
-    <meta property="og:description" content="CloudFlare IP 智能优选工具 · CM/CT/CU 三网路由自动调度 · 实时延迟监控">
-    <meta property="og:image"       content="ITDOGTcping.webp">
-    <meta property="og:locale"      content="zh_CN">
-    <!-- Twitter / X Card -->
-    <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="OptiDomain · CloudFlare Edge Routing">
-    <meta name="twitter:description" content="CloudFlare IP 智能优选，三网路由自动调度">
-    <meta name="twitter:image"       content="ITDOGTcping.webp">
-
-    <!--
-        Content-Security-Policy:
-        - connect-src limited to self + data source only (principle of least privilege)
-        - frame-src limited to known embed origins
-    -->
-    <meta http-equiv="Content-Security-Policy"
-        content="
-            default-src 'self';
-            script-src  'self';
-            style-src   'self' https://fonts.googleapis.com;
-            font-src    'self' https://fonts.gstatic.com;
-            img-src     'self' data:;
-            frame-src   https://vps789.com;
-            connect-src 'self';
-        ">
-
-    <!-- DNS preconnect for render-critical font origins -->
+    <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- DNS prefetch for jump targets (user-initiated, so non-critical) -->
-    <link rel="dns-prefetch" href="https://www.itdog.cn">
-    <link rel="dns-prefetch" href="https://vps789.com">
-
-    <!-- Fonts: display=swap prevents FOIT, updated to Inter Variable Font to significantly reduce network request sizes -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:wght@400;500&display=swap"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
-          rel="stylesheet">
-
-    <!-- Web App Manifest (PWA installable) -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#FBF8F3">
-
-    <!-- Critical resource preload: tell browser these are render-blocking -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
-
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <!-- SW Version Check -->
-    <div class="u-hidden" id="v-check">v32-FINAL</div>
-    <!-- Toast: aria-live so screen readers announce copy confirmations -->
-    <div id="toast" class="md-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <main class="md-container">
-
-        <!-- Page header -->
-        <header class="md-header">
-            <h1 class="site-headline">
-                <span class="material-symbols-outlined site-headline__icon" aria-hidden="true">cloud</span>OptiDomain
-            </h1>
-            <p class="md-subtitle">CloudFlare Smart Routing</p>
-            <p class="md-body-text" style="margin-top:-8px;">为您智能挑选极速 IP，让网络体验如丝般顺滑 ✨</p>
+    <main class="page-shell">
+        <header class="hero">
+            <div>
+                <p class="eyebrow"><span class="status-dot"></span>OPTIMIZED CLOUDFLARE EDGE</p>
+                <h1><span class="material-symbols-outlined" aria-hidden="true">cloud</span>OptiDomain</h1>
+                <p class="hero-copy">A compact set of preferred hosts and optimized edge IPs.</p>
+            </div>
+            <div class="port-lock" aria-label="Only port 443 is available">
+                <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+                <span><strong>443</strong><small>ONLY</small></span>
+            </div>
         </header>
 
-        <!-- Section 1: Real-time monitoring -->
-        <section class="md-card" aria-labelledby="monitor-title">
-            <h2 class="md-title" id="monitor-title">Live Network Radar</h2>
-            <p class="md-body-text">Real-time Edge Node Latency &middot; 24h Full-chain Routing Trace<br>
-            <span style="font-size: 0.9em; opacity: 0.85;">全天候扫描边缘节点，网络波动一目了然 📡</span></p>
+        <div class="notice-card" role="note">
+            <span class="material-symbols-outlined" aria-hidden="true">info</span>
+            <p><strong>Port restriction:</strong> these hosts are available on <b>port 443 only</b>. Specify <code>:443</code> in your client or proxy configuration.</p>
+        </div>
 
-            <div class="monitor-iframe-wrap" id="monitorIframeWrap">
-                <iframe
-                    id="monitorIframe"
-                    src="https://vps789.com/public/view/41818"
-                    title="24h Ping 延迟监控图表"
-                    frameborder="0"
-                    scrolling="no"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-popups"
-                    class="monitor-iframe">
-                </iframe>
-            </div>
+        <div class="content-grid">
+            <section class="domain-panel" aria-labelledby="domain-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">PREFERRED HOSTS</p>
+                        <h2 id="domain-title">Connect</h2>
+                    </div>
+                </div>
+                <div class="domain-list">
+                    <article class="domain-card">
+                        <div class="domain-copy"><span class="tag">PRIMARY</span><code>cdn.fiatnorm.us.kg:443</code></div>
+                        <div class="domain-actions">
+                            <button class="button button-tonal" data-copy="cdn.fiatnorm.us.kg:443" aria-label="Copy primary host"><span class="material-symbols-outlined" aria-hidden="true">content_copy</span></button>
+                            <a class="button button-filled" href="https://www.tcptest.cn/tcping/cdn.fiatnorm.us.kg:443" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined" aria-hidden="true">speed</span>TCP Test</a>
+                        </div>
+                    </article>
+                    <article class="domain-card domain-card--accent">
+                        <div class="domain-copy"><span class="tag">WILDCARD</span><code id="wildcardHost" aria-live="polite">*.cdn.fiatnorm.us.kg:443</code></div>
+                        <div class="domain-actions">
+                            <button class="button button-tonal" data-wildcard-copy aria-label="Copy a random wildcard host"><span class="material-symbols-outlined" aria-hidden="true">content_copy</span></button>
+                            <button class="button button-filled" data-wildcard-test><span class="material-symbols-outlined" aria-hidden="true">speed</span>TCP Test</button>
+                        </div>
+                    </article>
+                </div>
+                <section class="test-result" aria-labelledby="test-result-title">
+                    <div class="result-heading"><p class="section-kicker">TCPTEST RESULT</p><span id="test-result-title">Connectivity snapshot</span></div>
+                    <img src="Tcptest.webp" alt="Tcptest nationwide TCP connectivity result">
+                </section>
+            </section>
 
-            <div class="tcping-wrap">
-                <h3 class="md-body-text tcping-label">TCPing Connectivity Snapshot<br>
-                <span style="font-size: 0.85em; font-weight: 400; opacity: 0.8;">新鲜出炉的全国连通性快照 📸</span></h3>
-                <!-- Explicit dimensions prevent CLS layout shift -->
-                <img
-                    id="tcpingImg"
-                    src="ITDOGTcping.webp"
-                    alt="ITDog TCPing nationwide connectivity test snapshot"
-                    loading="lazy"
-                    width="900"
-                    height="500"
-                    class="tcping-img">
-                <!-- Error fallback injected by script.js if image fails to load -->
-                <div id="tcpingErrorPlaceholder" class="tcping-error-placeholder" hidden></div>
+            <section class="data-panel" aria-labelledby="data-title">
+                <div class="section-heading data-heading">
+                    <div>
+                        <p class="section-kicker">EDGE SELECTION</p>
+                        <h2 id="data-title">Optimized IPs</h2>
+                    </div>
+                    <p id="syncStatus" class="sync-status">Loading nodes…</p>
+                </div>
+                <div class="table-wrap" role="region" aria-label="Optimized IP table" tabindex="0">
+                    <table>
+                        <colgroup><col class="ip-column"><col><col><col><col><col class="download-column"><col></colgroup>
+                        <thead><tr><th scope="col">IP:PORT</th><th scope="col">COUNTRY</th><th scope="col">COLO</th><th scope="col">LATENCY</th><th scope="col">LOSS</th><th scope="col">DOWNLOAD</th><th scope="col">SCORE</th></tr></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                <section class="network-summary" aria-labelledby="summary-title">
+                    <div class="summary-heading">
+                        <div>
+                            <p class="section-kicker">NETWORK OVERVIEW</p>
+                            <h3 id="summary-title">At a glance</h3>
+                        </div>
+                        <p id="sourceTimestamp" class="source-timestamp">Awaiting source data</p>
+                    </div>
+                    <div class="metric-grid">
+                        <article class="metric-card"><span>BEST LATENCY</span><strong id="bestLatency">—</strong><small id="bestLatencyDetail">Loading node data</small></article>
+                        <article class="metric-card"><span>PEAK DOWNLOAD</span><strong id="peakDownload">—</strong><small id="peakDownloadDetail">Loading node data</small></article>
+                        <article class="metric-card"><span>EDGE COVERAGE</span><strong id="edgeCoverage">—</strong><small id="edgeCoverageDetail">Loading node data</small></article>
+                    </div>
+                    <p class="connection-tip"><span class="material-symbols-outlined" aria-hidden="true">tips_and_updates</span>Copy an <code>IP:443</code> entry into your client, then use the preferred host as the SNI or Host value.</p>
+                </section>
+                <div id="retryBlock" class="retry-block" hidden><button class="button button-tonal" data-retry><span class="material-symbols-outlined" aria-hidden="true">refresh</span>Try Again</button></div>
+            </section>
+        </div>
+
+        <section class="setup-guide" aria-labelledby="setup-title">
+            <div class="setup-guide__intro">
+                <p class="section-kicker">QUICK SETUP</p>
+                <h2 id="setup-title">Connect in three steps</h2>
             </div>
+            <ol class="setup-steps">
+                <li><span class="step-number">01</span><div><strong>Choose an edge</strong><p>Select an <code>IP:443</code> entry with the best latency or download result.</p></div></li>
+                <li><span class="step-number">02</span><div><strong>Set Host / SNI</strong><p>Use <code>cdn.fiatnorm.us.kg</code> as the preferred host value.</p></div></li>
+                <li><span class="step-number">03</span><div><strong>Verify connectivity</strong><p>Run TCP Test and keep the client port fixed at <code>443</code>.</p></div></li>
+            </ol>
         </section>
-
-        <!-- Section 2: ISP route dispatch -->
-        <section class="md-card" id="dispatchPanel" aria-labelledby="dispatch-title">
-            <h2 class="md-title" id="dispatch-title">ISP Route Dispatch</h2>
-            <p class="md-body-text">轻轻一点即可复制各运营商的专属优选 IP，快去 CloudFlare 填入享受提速吧 🚀</p>
-
-            <div class="domain-list" role="list">
-
-                <div class="domain-item" role="listitem">
-                    <div class="domain-info">
-                        <h3 class="code-font txt-base">cm.cdn</h3>
-                        <span class="badge cm-badge">移动 (CM) &middot; 低延迟专线，告别卡顿</span>
-                    </div>
-                    <div class="domain-actions">
-                        <button class="md-btn btn-tonal" data-action="copy" data-target="cm.cdn"
-                                aria-label="复制移动优化域名 cm.cdn 到剪贴板">
-                            <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>复制
-                        </button>
-                        <button class="md-btn btn-filled" data-action="test" data-target="cm.cdn"
-                                aria-label="ITDog Tcping 测试 cm.cdn">
-                            <span class="material-symbols-outlined" aria-hidden="true">speed</span>ITDog Tcping
-                        </button>
-                    </div>
-                </div>
-
-                <div class="domain-item" role="listitem">
-                    <div class="domain-info">
-                        <h3 class="code-font txt-base">ct.cdn</h3>
-                        <span class="badge ct-badge">电信 (CT) &middot; CN2 GIA 高端直连</span>
-                    </div>
-                    <div class="domain-actions">
-                        <button class="md-btn btn-tonal" data-action="copy" data-target="ct.cdn"
-                                aria-label="复制电信优化域名 ct.cdn 到剪贴板">
-                            <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>复制
-                        </button>
-                        <button class="md-btn btn-filled" data-action="test" data-target="ct.cdn"
-                                aria-label="ITDog Tcping 测试 ct.cdn">
-                            <span class="material-symbols-outlined" aria-hidden="true">speed</span>ITDog Tcping
-                        </button>
-                    </div>
-                </div>
-
-                <div class="domain-item" role="listitem">
-                    <div class="domain-info">
-                        <h3 class="code-font txt-base">cu.cdn</h3>
-                        <span class="badge cu-badge">联通 (CU) &middot; 双线护航，全速满跑</span>
-                    </div>
-                    <div class="domain-actions">
-                        <button class="md-btn btn-tonal" data-action="copy" data-target="cu.cdn"
-                                aria-label="复制联通优化域名 cu.cdn 到剪贴板">
-                            <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>复制
-                        </button>
-                        <button class="md-btn btn-filled" data-action="test" data-target="cu.cdn"
-                                aria-label="ITDog Tcping 测试 cu.cdn">
-                            <span class="material-symbols-outlined" aria-hidden="true">speed</span>ITDog Tcping
-                        </button>
-                    </div>
-                </div>
-
-                <div class="domain-item" role="listitem">
-                    <div class="domain-info">
-                        <h3 class="code-font txt-base">avg.cdn</h3>
-                        <span class="badge avg-badge">三网 BGP &middot; 智能均衡，永远在线</span>
-                    </div>
-                    <div class="domain-actions">
-                        <button class="md-btn btn-tonal" data-action="copy" data-target="avg.cdn"
-                                aria-label="复制三网均衡域名 avg.cdn 到剪贴板">
-                            <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>复制
-                        </button>
-                        <button class="md-btn btn-filled" data-action="test" data-target="avg.cdn"
-                                aria-label="ITDog Tcping 测试 avg.cdn">
-                            <span class="material-symbols-outlined" aria-hidden="true">speed</span>ITDog Tcping
-                        </button>
-                    </div>
-                </div>
-
-                <div class="domain-item" role="listitem">
-                    <div class="domain-info">
-                        <h3 class="code-font txt-base">cdn.default</h3>
-                        <span class="badge default-badge">GeoIP 默认路由 &middot; 贴心的兜底保护</span>
-                    </div>
-                    <div class="domain-actions">
-                        <button class="md-btn btn-tonal" data-action="copy" data-target="cdn"
-                                aria-label="复制默认域名 cdn.default 到剪贴板">
-                            <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>复制
-                        </button>
-                        <button class="md-btn btn-filled" data-action="test" data-target="cdn"
-                                aria-label="ITDog Tcping 测试默认域名">
-                            <span class="material-symbols-outlined" aria-hidden="true">speed</span>ITDog Tcping
-                        </button>
-                    </div>
-                </div>
-
-                <div class="domain-item wildcard-item" role="listitem">
-                    <div class="domain-info">
-                        <h3 class="code-font txt-base">*.cdn</h3>
-                        <span class="badge wildcard-badge">Wildcard &middot; 泛解析无惧网络污染</span>
-                    </div>
-                    <div class="domain-actions">
-                        <button class="md-btn btn-tonal wildcard-btn" data-action="copy" data-target="wildcard"
-                                aria-label="生成随机泛域名并复制到剪贴板">
-                            <span class="material-symbols-outlined" aria-hidden="true">pattern</span>泛域名复制
-                        </button>
-                        <button class="md-btn btn-filled wildcard-btn" data-action="test" data-target="wildcard"
-                                aria-label="使用随机泛域名进行 ITDog Tcping">
-                            <span class="material-symbols-outlined" aria-hidden="true">speed</span>泛域名 ITDog Tcping
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Section 3: Real-time node cluster table -->
-        <section class="md-card table-section" aria-labelledby="cluster-title">
-            <h2 class="md-title" id="cluster-title">Real-time Cluster</h2>
-            <p id="lastSyncTxt" class="md-body-text sync-label">正在努力为您拉取新鲜的节点数据中… ⏳</p>
-
-            <div class="md-table-wrapper" role="region" aria-label="IP 节点数据表" tabindex="0">
-                <table id="ipsTable">
-                    <thead>
-                        <tr>
-                            <th scope="col">Line Channel</th>
-                            <th scope="col">IP</th>
-                            <th scope="col">Avg Latency</th>
-                            <th scope="col">Loss Rate</th>
-                            <th scope="col">Colo Edge</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <!-- Skeleton rows injected by script.js on DOMContentLoaded -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="retryBlock" class="retry-block" hidden>
-                <button class="md-btn btn-tonal" data-action="retryFetch"
-                        aria-label="重新获取节点数据">
-                    <span class="material-symbols-outlined" aria-hidden="true">refresh</span>Retry Fetch
-                </button>
-            </div>
-        </section>
-
     </main>
 
-    <!-- Footer for Open Source License & GitHub Repo -->
-    <footer class="md-footer" aria-label="版权与开源许可信息">
-        <div class="footer-content">
-            <p>&copy; 2026 OptiDomain. Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT License</a>.</p>
-            <p>GitHub Repository: <a href="https://github.com/Djx-Ybelove/OptiDomain-Pages" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository">Djx-Ybelove/OptiDomain-Pages</a></p>
-        </div>
+    <footer>
+        <span>Open source under the <a href="https://opensource.org/license/mit" target="_blank" rel="noopener noreferrer">MIT License</a>.</span>
+        <a href="https://github.com/Fiatnorm/OptiDomain-Pages" target="_blank" rel="noopener noreferrer">GitHub · Fiatnorm/OptiDomain-Pages</a>
     </footer>
-
-    <!-- type="module": auto-defer + strict mode + isolated scope (no global pollution) -->
     <script type="module" src="script.js"></script>
 </body>
-
 </html>

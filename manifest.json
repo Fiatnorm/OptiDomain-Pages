@@ -1,7 +1,7 @@
 {
-    "name": "OptiDomain - CloudFlare 路由调度",
+    "name": "OptiDomain - Optimized IPs",
     "short_name": "OptiDomain",
-    "description": "CloudFlare IP 智能优选 · 三网自动路由调度",
+    "description": "Optimized Cloudflare IPs · Port 443 only",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#FBF8F3",
