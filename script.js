@@ -1,7 +1,7 @@
 'use strict';
 
 const CONFIG = Object.freeze({
-    endpoint: 'https://raw.githubusercontent.com/Fiatnorm/OptiDomain-Pages/main/optimized_cf_ips.txt',
+    endpoint: 'https://github-proxy.fiatnorm.pp.ua/https://raw.githubusercontent.com/Fiatnorm/OptiDomain-Pages/refs/heads/main/optimized_cf_ips.txt',
     columns: ['IP:PORT', 'COUNTRY', 'COLO', 'LATENCY', 'LOSS', 'DOWNLOAD', 'SCORE'],
 });
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'optidomain-v37-static';
+const CACHE_NAME = 'optidomain-v38-static';
 const STATIC_ASSETS = ['/', '/index.html', '/styles.css', '/script.js', '/manifest.json', '/Tcptest.webp'];
 
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS)).then(() => self.skipWaiting())));

@@ -3,7 +3,7 @@
 ## 项目范围
 
 - 无构建步骤的静态前端：`index.html`、`styles.css`、`script.js`。
-- `optimized_cf_ips.txt` 是页面读取的节点数据；前端从 GitHub `main` 的 raw 文件获取它，不要改动其字段格式。
+- `optimized_cf_ips.txt` 是页面读取的节点数据；前端通过指定的 GitHub raw 反代从 `main` 获取它，不要改动其字段格式。
 - 节点行允许以 `-` 表示缺失的下载或评分；解析必须保留有效节点，概览仅计算实际数值。首行时间戳格式为 `#ExecutionTime:`。
 - `Tcptest.webp` 是连通性快照资源；不要用旧的 `ITDOGTcping.webp` 替换它。
 - `sw.js` 管理静态资产和节点数据缓存。修改缓存的静态资源时递增 `CACHE_NAME`，保证预览能拿到最新文件。
