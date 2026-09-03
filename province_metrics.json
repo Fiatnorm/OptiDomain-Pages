@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-02T13:33:17+08:00",
-  "province_fastest_mean_ms": 42.94,
-  "real_sample_latency_mean_ms": 135.97,
+  "generated_at": "2026-09-03T13:39:10+08:00",
+  "province_fastest_mean_ms": 40.54,
+  "real_sample_latency_mean_ms": 141.61,
   "method": "observed minimum for fastest response and observed arithmetic mean per carrier; only missing metrics use the arithmetic mean of adjacent provinces in deterministic rounds",
   "provinces": {
     "北京": {
-      "fastest_response_ms": 42.0,
-      "mobile_mean_ms": 201.75,
-      "unicom_mean_ms": 168.0,
-      "telecom_mean_ms": 87.0,
+      "fastest_response_ms": 52.0,
+      "mobile_mean_ms": 158.83,
+      "unicom_mean_ms": 185.42,
+      "telecom_mean_ms": 96.08,
       "sources": {
         "fastest_response_ms": "observed",
         "mobile_mean_ms": "observed",
@@ -25,10 +25,10 @@
       }
     },
     "天津": {
-      "fastest_response_ms": 45.0,
-      "mobile_mean_ms": 114.42,
-      "unicom_mean_ms": 194.83,
-      "telecom_mean_ms": 87.0,
+      "fastest_response_ms": 50.0,
+      "mobile_mean_ms": 173.12,
+      "unicom_mean_ms": 194.67,
+      "telecom_mean_ms": 96.08,
       "sources": {
         "fastest_response_ms": "observed",
         "mobile_mean_ms": "observed",
@@ -37,38 +37,22 @@
       }
     },
     "上海": {
-      "fastest_response_ms": 61.0,
-      "mobile_mean_ms": 193.51875,
-      "unicom_mean_ms": 232.85375,
-      "telecom_mean_ms": 68.17,
+      "fastest_response_ms": 34.0,
+      "mobile_mean_ms": 231.58,
+      "unicom_mean_ms": 185.92,
+      "telecom_mean_ms": 81.28,
       "sources": {
         "fastest_response_ms": "observed",
-        "mobile_mean_ms": "estimated",
-        "unicom_mean_ms": "estimated",
+        "mobile_mean_ms": "observed",
+        "unicom_mean_ms": "observed",
         "telecom_mean_ms": "observed"
-      },
-      "estimates": {
-        "mobile_mean_ms": {
-          "neighbors": [
-            "江苏",
-            "浙江"
-          ],
-          "round": 4
-        },
-        "unicom_mean_ms": {
-          "neighbors": [
-            "江苏",
-            "浙江"
-          ],
-          "round": 4
-        }
       }
     },
     "重庆": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "observed",
         "mobile_mean_ms": "observed",
@@ -77,10 +61,10 @@
       }
     },
     "河北": {
-      "fastest_response_ms": 43.5,
-      "mobile_mean_ms": 158.085,
-      "unicom_mean_ms": 181.41500000000002,
-      "telecom_mean_ms": 87.0,
+      "fastest_response_ms": 51.0,
+      "mobile_mean_ms": 165.97500000000002,
+      "unicom_mean_ms": 190.045,
+      "telecom_mean_ms": 96.08,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -118,10 +102,10 @@
       }
     },
     "河南": {
-      "fastest_response_ms": 39.166666666666664,
-      "mobile_mean_ms": 189.58166666666668,
-      "unicom_mean_ms": 227.13833333333332,
-      "telecom_mean_ms": 83.36,
+      "fastest_response_ms": 43.0,
+      "mobile_mean_ms": 218.65833333333333,
+      "unicom_mean_ms": 188.795,
+      "telecom_mean_ms": 99.47333333333334,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -164,10 +148,10 @@
       }
     },
     "云南": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -206,10 +190,10 @@
       }
     },
     "辽宁": {
-      "fastest_response_ms": 43.5,
-      "mobile_mean_ms": 158.085,
-      "unicom_mean_ms": 181.41500000000002,
-      "telecom_mean_ms": 87.0,
+      "fastest_response_ms": 51.0,
+      "mobile_mean_ms": 165.97500000000002,
+      "unicom_mean_ms": 190.045,
+      "telecom_mean_ms": 96.08,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -244,10 +228,10 @@
       }
     },
     "黑龙江": {
-      "fastest_response_ms": 40.25,
-      "mobile_mean_ms": 181.7075,
-      "unicom_mean_ms": 215.7075,
-      "telecom_mean_ms": 84.27000000000001,
+      "fastest_response_ms": 45.0,
+      "mobile_mean_ms": 205.4875,
+      "unicom_mean_ms": 189.1075,
+      "telecom_mean_ms": 98.625,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -282,10 +266,10 @@
       }
     },
     "湖南": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -320,10 +304,10 @@
       }
     },
     "安徽": {
-      "fastest_response_ms": 53.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 72.62666666666667,
+      "fastest_response_ms": 35.666666666666664,
+      "mobile_mean_ms": 236.05333333333337,
+      "unicom_mean_ms": 186.67,
+      "telecom_mean_ms": 87.91000000000001,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -341,12 +325,16 @@
         },
         "mobile_mean_ms": {
           "neighbors": [
+            "江苏",
+            "浙江",
             "湖北"
           ],
           "round": 2
         },
         "unicom_mean_ms": {
           "neighbors": [
+            "江苏",
+            "浙江",
             "湖北"
           ],
           "round": 2
@@ -362,10 +350,10 @@
       }
     },
     "山东": {
-      "fastest_response_ms": 52.25,
-      "mobile_mean_ms": 158.085,
-      "unicom_mean_ms": 181.41500000000002,
-      "telecom_mean_ms": 77.58500000000001,
+      "fastest_response_ms": 42.5,
+      "mobile_mean_ms": 198.77750000000003,
+      "unicom_mean_ms": 187.9825,
+      "telecom_mean_ms": 88.68,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -382,12 +370,14 @@
         },
         "mobile_mean_ms": {
           "neighbors": [
+            "江苏",
             "河北"
           ],
           "round": 2
         },
         "unicom_mean_ms": {
           "neighbors": [
+            "江苏",
             "河北"
           ],
           "round": 2
@@ -402,10 +392,10 @@
       }
     },
     "新疆": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -448,10 +438,10 @@
       }
     },
     "江苏": {
-      "fastest_response_ms": 61.0,
-      "mobile_mean_ms": 181.7075,
-      "unicom_mean_ms": 215.7075,
-      "telecom_mean_ms": 68.17,
+      "fastest_response_ms": 34.0,
+      "mobile_mean_ms": 231.58,
+      "unicom_mean_ms": 185.92,
+      "telecom_mean_ms": 81.28,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -467,17 +457,15 @@
         },
         "mobile_mean_ms": {
           "neighbors": [
-            "安徽",
-            "山东"
+            "上海"
           ],
-          "round": 3
+          "round": 1
         },
         "unicom_mean_ms": {
           "neighbors": [
-            "安徽",
-            "山东"
+            "上海"
           ],
-          "round": 3
+          "round": 1
         },
         "telecom_mean_ms": {
           "neighbors": [
@@ -488,10 +476,10 @@
       }
     },
     "浙江": {
-      "fastest_response_ms": 61.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 68.17,
+      "fastest_response_ms": 34.0,
+      "mobile_mean_ms": 231.58,
+      "unicom_mean_ms": 185.92,
+      "telecom_mean_ms": 81.28,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -507,17 +495,15 @@
         },
         "mobile_mean_ms": {
           "neighbors": [
-            "安徽",
-            "江西"
+            "上海"
           ],
-          "round": 3
+          "round": 1
         },
         "unicom_mean_ms": {
           "neighbors": [
-            "安徽",
-            "江西"
+            "上海"
           ],
-          "round": 3
+          "round": 1
         },
         "telecom_mean_ms": {
           "neighbors": [
@@ -528,10 +514,10 @@
       }
     },
     "江西": {
-      "fastest_response_ms": 45.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 77.08333333333333,
+      "fastest_response_ms": 37.333333333333336,
+      "mobile_mean_ms": 240.52666666666667,
+      "unicom_mean_ms": 187.42,
+      "telecom_mean_ms": 94.54,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -549,6 +535,7 @@
         },
         "mobile_mean_ms": {
           "neighbors": [
+            "浙江",
             "湖北",
             "湖南"
           ],
@@ -556,6 +543,7 @@
         },
         "unicom_mean_ms": {
           "neighbors": [
+            "浙江",
             "湖北",
             "湖南"
           ],
@@ -572,10 +560,10 @@
       }
     },
     "湖北": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -610,10 +598,10 @@
       }
     },
     "广西": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -652,10 +640,10 @@
       }
     },
     "甘肃": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -694,10 +682,10 @@
       }
     },
     "山西": {
-      "fastest_response_ms": 40.25,
-      "mobile_mean_ms": 181.7075,
-      "unicom_mean_ms": 215.7075,
-      "telecom_mean_ms": 84.27000000000001,
+      "fastest_response_ms": 45.0,
+      "mobile_mean_ms": 205.4875,
+      "unicom_mean_ms": 189.1075,
+      "telecom_mean_ms": 98.625,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -736,10 +724,10 @@
       }
     },
     "内蒙古": {
-      "fastest_response_ms": 40.25,
-      "mobile_mean_ms": 181.7075,
-      "unicom_mean_ms": 215.7075,
-      "telecom_mean_ms": 84.27000000000001,
+      "fastest_response_ms": 45.0,
+      "mobile_mean_ms": 205.4875,
+      "unicom_mean_ms": 189.1075,
+      "telecom_mean_ms": 98.625,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -778,10 +766,10 @@
       }
     },
     "陕西": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -816,10 +804,10 @@
       }
     },
     "吉林": {
-      "fastest_response_ms": 41.875,
-      "mobile_mean_ms": 169.89625,
-      "unicom_mean_ms": 198.56125000000003,
-      "telecom_mean_ms": 85.635,
+      "fastest_response_ms": 48.0,
+      "mobile_mean_ms": 185.73125000000002,
+      "unicom_mean_ms": 189.57625,
+      "telecom_mean_ms": 97.35249999999999,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -858,10 +846,10 @@
       }
     },
     "福建": {
-      "fastest_response_ms": 61.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 68.17,
+      "fastest_response_ms": 34.0,
+      "mobile_mean_ms": 231.58,
+      "unicom_mean_ms": 185.92,
+      "telecom_mean_ms": 81.28,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -877,17 +865,15 @@
         },
         "mobile_mean_ms": {
           "neighbors": [
-            "广东",
-            "江西"
+            "浙江"
           ],
-          "round": 3
+          "round": 2
         },
         "unicom_mean_ms": {
           "neighbors": [
-            "广东",
-            "江西"
+            "浙江"
           ],
-          "round": 3
+          "round": 2
         },
         "telecom_mean_ms": {
           "neighbors": [
@@ -898,10 +884,10 @@
       }
     },
     "贵州": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -936,10 +922,10 @@
       }
     },
     "广东": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -974,10 +960,10 @@
       }
     },
     "青海": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -1012,10 +998,10 @@
       }
     },
     "西藏": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -1050,10 +1036,10 @@
       }
     },
     "四川": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -1088,10 +1074,10 @@
       }
     },
     "宁夏": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -1126,10 +1112,10 @@
       }
     },
     "海南": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -1164,10 +1150,10 @@
       }
     },
     "台湾": {
-      "fastest_response_ms": 61.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 68.17,
+      "fastest_response_ms": 34.0,
+      "mobile_mean_ms": 231.58,
+      "unicom_mean_ms": 185.92,
+      "telecom_mean_ms": 81.28,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -1185,13 +1171,13 @@
           "neighbors": [
             "福建"
           ],
-          "round": 4
+          "round": 3
         },
         "unicom_mean_ms": {
           "neighbors": [
             "福建"
           ],
-          "round": 4
+          "round": 3
         },
         "telecom_mean_ms": {
           "neighbors": [
@@ -1202,10 +1188,10 @@
       }
     },
     "香港": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
@@ -1240,10 +1226,10 @@
       }
     },
     "澳门": {
-      "fastest_response_ms": 37.0,
-      "mobile_mean_ms": 205.33,
-      "unicom_mean_ms": 250.0,
-      "telecom_mean_ms": 81.54,
+      "fastest_response_ms": 39.0,
+      "mobile_mean_ms": 245.0,
+      "unicom_mean_ms": 188.17,
+      "telecom_mean_ms": 101.17,
       "sources": {
         "fastest_response_ms": "estimated",
         "mobile_mean_ms": "estimated",
